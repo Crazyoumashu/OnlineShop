@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhw.dao.OrdersDao">
+    <resultMap type="Orders" id="OrdersResultMap">
+        <id property="oid" column="oid" />
+        <result property="time" column="time" />
+        <result property="state" column="state" />
+        <result property="uid" column="uid" />
+        <result property="sid" column="sid" />
+    </resultMap>
+
+    <select id="getOrderByUserId" resultMap="OrdersResultMap">
+        select * from orders where uid=#{uid}
+    </select>
+
+    <select id="queryById" resultType="Orders">
+        select * from orders where oid=#{oid}
+    </select>
+
+    <insert id="addOrders">
+        insert into orders
+        value(#{oid},#{time},#{state},#{uid},#{sid})
+    </insert>
+
+    <update id="updateOrder">
+        update orders set
+        time=#{time},state=#{state},uid=#{uid},sid=#{sid}
+        where oid=#{oid}
+    </update>
+
+    <delete id="deleteOrders">
+        delete from orders
+        where oid=#{oid}
+    </delete>
+
+    <select id="getAllOrders" resultMap="OrdersResultMap">
+        select * from orders
+    </select>
+
+    <select id="getOrdersByState" resultMap="OrdersResultMap">
+        select * from orders
+        where state=#{state}
+    </select>
+
+    <select id="getOrdersByUidAndState" resultMap="OrdersResultMap">
+        select * from orders
+        where uid=#{uid} and state=#{state}
+    </select>
+
+    <select id="getOrdersByDateAndState" resultMap="OrdersResultMap">
+        select * from orders
+        where uid=#{uid} and state=#{state} and
+        time between #{begin} and #{end}
+    </select>
+
+    <select id="getOrderBySalerId" resultMap="OrdersResultMap">
+        select * from orders where sid=#{sid}
+    </select>
+
+    <update id="editState">
+        update orders set
+        state=#{state} where oid=#{oid}
+    </update>
+
+    <select id="getMaxOid" resultType="Integer">
+        select max(oid) from orders
+    </select>
+</mapper>

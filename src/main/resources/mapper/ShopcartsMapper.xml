@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hhw.dao.ShopcartsDao">
+    <resultMap type="Shopcarts" id="ShopcartsResultMap">
+        <id property="scid" column="scid" />
+        <result property="uid" column="uid" />
+    </resultMap>
+    <update id="addShopcarts">
+        insert into shopcart values(#{scid},#{uid})
+    </update>
+    <select id="getShopcartsByUid" resultMap="ShopcartsResultMap">
+        select * from shopcart where uid=#{uid}
+    </select>
+    <select id="getMaxScid" resultType="Integer">
+        select max(scid) from shopcart
+    </select>
+
+</mapper>

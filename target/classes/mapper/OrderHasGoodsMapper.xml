@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hhw.dao.OrderHasGoodsDao">
+    <resultMap type="OrderHasGoods" id="OrderHasGoodsResultMap">
+        <id property="id" column="id" />
+        <result property="oid" column="oid" />
+        <result property="gid" column="gid" />
+        <result property="num" column="num" />
+        <result property="price" column="price" />
+    </resultMap>
+
+    <insert id="addOrderDetail">
+        insert into order_has_goods
+        values(#{num},#{price},#{id},#{gid},#{oid})
+    </insert>
+
+    <update id="updateOrderDetail">
+        update order_has_goods set
+        num=#{num},price=#{price}
+    </update>
+
+    <select id="getOrderDetailByOrderId" resultMap="OrderHasGoodsResultMap">
+        select * from order_has_goods
+        where oid=#{oid}
+    </select>
+
+    <delete id="deleteByOrderId">
+        delete from order_has_goods
+        where oid=#{oid}
+    </delete>
+
+    <select id="getMaxId" resultType="Integer">
+        select max(id) from order_has_goods
+    </select>
+</mapper>

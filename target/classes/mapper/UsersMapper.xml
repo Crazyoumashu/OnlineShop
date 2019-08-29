@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hhw.dao.UsersDao">
+    <resultMap type="Users" id="UserResultMap">
+        <id property="uid" column="uid" />
+        <result property="name" column="name" />
+        <result property="password" column="password" />
+        <result property="phone_num" column="phone_num" />
+        <result property="sex" column="sex" />
+        <result property="email" column="email" />
+		<result property="discount" column="discount" />
+		<result property="groupid" column="groupid" />
+		<result property="username" column="username" />
+		<result property="status" column="status" />
+		<result property="is_paying" column="is_paying" />
+    </resultMap>
+    <!--
+    <insert id="addLogin" parameterType="User">
+		insert into visit
+		values(#{id},#{ip},#{userid},#{loginTime,jdbcType=CHAR})
+	</insert>
+    -->
+    <update id="editEmail">
+		update users set email=#{email} where uid=#{uid}
+	</update>
+
+    <update id="editPhone">
+		update users set phone_num=#{phone_num} where uid=#{uid}
+	</update>
+
+	<update id="editSex">
+		update users set sex=#{sex} where uid=#{uid}
+	</update>
+
+	<update id="editName">
+		update users set name=#{name} where uid=#{uid}
+	</update>
+
+	<update id="editDiscount">
+		update users set discount=#{discount} where uid=#{uid}
+	</update>
+
+	<update id="editGroupId">
+		update users set groupid=#{groupid} where uid=#{uid}
+	</update>
+
+    <insert id="addUser" parameterType="Users">
+		insert into users
+		values(#{uid},#{email},#{password},#{sex},#{phone_num},#{name},#{discount},
+		#{groupid}, #{username}, #{status}, #{is_paying})
+	</insert>
+
+    <select id="queryById" parameterType="int" resultType="Users">
+		select * from users where uid=#{uid}
+	</select>
+
+    <select id="queryByname" parameterType="String" resultType="Users">
+		select * from users where username=#{username}
+	</select>
+
+    <select id="getUserByNameAndPwd"  resultType="Users">
+		select * from
+		users where username=#{username} and password=#{password}
+	</select>
+    <!--select * from shop_user where name=#{0} and password=#{1}-->
+
+    <update id="editPassword">
+		update users set password=#{password} where uid=#{uid}
+	</update>
+
+    <!--update shop_user set avatar=#{1} where id=#{0}-->
+
+    <!--update shop_user set money=#{1} where id=#{0}-->
+
+
+    <select id="getAllUser" resultMap="UserResultMap">
+		select * from users
+	</select>
+	<!--
+	<delete id="deleteUser">
+		delete from users where uid = #{uid}
+	</delete>
+	-->
+
+	<update id="editStatus">
+		update users set status = #{status} where uid = #{uid}
+	</update>
+
+    <update id="deleteUser" >
+		update users set
+		status=2 where uid=#{uid}
+	</update>
+
+	<update id="updateUser">
+		update users set
+		email = #{email},password=#{password},sex=#{sex},phone_num=#{phone_num},name=#{name},
+		discount=#{discount},groupid=#{groupid},username=#{username},status=#{status},is_paying=#{is_paying}
+		where uid=#{uid}
+	</update>
+
+	<select id="getMaxUid" resultType="Integer">
+		select max(uid) from users
+	</select>
+
+	<select id="getUserByUsernameAndPwdAndRank" resultType="Users">
+		select * from users where username=#{username} and password=#{password} and groupid=#{groupid}
+	</select>
+</mapper>

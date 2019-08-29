@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhw.dao.GoodsDao">
+
+    <resultMap type="com.hhw.beans.Goods" id="GoodsResultMap">
+        <id property="gid" column="gid" />
+        <result property="name" column="name" />
+        <result property="num" column="num" />
+        <result property="described" column="described" />
+        <result property="price" column="price" />
+        <result property="type" column="type" />
+        <result property="pdate" column="pdate" />
+        <result property="paddress" column="paddress" />
+        <result property="uid" column="uid" />
+        <result property="thumbnail" column="thumbnail"/>
+        <!--
+        <association property="category" javaType="Category">
+            <id property="id" column="id" />
+            <result property="name" column="cname" />
+        </association>
+        -->
+    </resultMap>
+    <!--
+    <select id="getGoodsByPageAndOrder" resultMap="GoodsResultMap"
+            parameterType="hashmap">
+        select g.*,c.name cname from shop_goods g,shop_category c where
+        g.categoryid=c.id
+        <if test="goods!=null">
+            <if test="goods.categoryId!=null and goods.categoryId!=''">
+                and g.categoryId=#{goods.categoryId}
+            </if>
+            <if test="goods.name!=null and goods.name!=''">
+                and g.name like "%"#{goods.name}"%"
+            </if>
+            ORDER BY ${order} desc
+            limit #{indexPage} ,#{pageSize}
+        </if>
+    </select>
+    -->
+
+
+    <insert id="addGoods" parameterType="Goods">
+		insert into good
+		values(#{gid},#{name},#{num},#{described},#{price},#{type},#{pdate},#{paddress},#{uid})
+	</insert>
+
+
+
+
+
+    <select id="queryById" resultType="Goods">
+		select * from good
+		where gid=#{gid}
+	</select>
+
+    <select id="getAllGoods" resultMap="GoodsResultMap">
+        select * from good
+    </select>
+
+    <update id="editInfo" parameterType="Goods">
+		update good set
+		name=#{name},num=#{num},described=#{described},price=#{price},type=#{type},pdate=#{pdate},paddress=#{paddress},uid=#{uid},thumbnail=#{thumbnail}
+		where gid=#{gid}
+	</update>
+
+    <delete id="deleteGoods">
+		delete from good where gid=#{gid}
+	</delete>
+
+    <select id="queryNumberById" resultType="int">
+        select num from good where gid=#{gid}
+    </select>
+
+    <select id="getTypeGoodsList" resultMap="GoodsResultMap">
+        select * from good where type=#{type}
+    </select>
+
+    <select id="getGoodsByUid" resultMap="GoodsResultMap">
+        select * from good where uid=#{uid}
+    </select>
+
+    <select id="getGoodsByTypeAndName" resultMap="GoodsResultMap">
+        select * from good where type like #{type} and name like #{name}
+    </select>
+    
+    <select id="getGoodsByPage" resultMap="GoodsResultMap">
+        select * from good limit #{indexPage}, #{pageSize}
+    </select>
+
+    <select id="getAllTypes" resultType="String">
+        select distinct type from good
+    </select>
+
+    <select id="getMaxGid" resultType="Integer">
+        select max(gid) from good
+    </select>
+</mapper>

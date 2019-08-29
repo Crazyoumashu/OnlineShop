@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC
+        "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <package name="com.hhw.beans" />
+    </typeAliases>
+
+    <!-- Spring中已经配置数据源和mapper接口文件扫描器
+         MyBatis的配置文件只需要根据POJO类路径进行别名配置-->
+
+    <!--&lt;!&ndash; 制定映射器路径 &ndash;&gt;-->
+    <!--
+    <mappers>
+        <mapper resource="src/main/resources/mapper/UsersMapper.xml" />
+        <mapper resource="src/main/resources/mapper/CartHasGoodsMapper.xml" />
+        <mapper resource="src/main/resources/mapper/GroupMapper.xml" />
+        <mapper resource="src/main/resources/mapper/OrderHasGoodsMapper.xml" />
+        <mapper resource="src/main/resources/mapper/OrdersMapper.xml" />
+        <mapper resource="src/main/resources/mapper/GoodsMapper.xml" />
+        <mapper resource="src/main/resources/mapper/ReceiversMapper.xml" />
+    </mappers>
+    -->
+
+    <mappers>
+        <mapper resource="com/hhw/dao/mapper/UsersMapper.xml" />
+        <mapper resource="com/hhw/dao/mapper/CartHasGoodsMapper.xml" />
+        <mapper resource="com/hhw/dao/mapper/GroupMapper.xml" />
+        <mapper resource="com/hhw/dao/mapper/OrderHasGoodsMapper.xml" />
+        <mapper resource="com/hhw/dao/mapper/OrdersMapper.xml" />
+        <mapper resource="com/hhw/dao/mapper/GoodsMapper.xml" />
+        <mapper resource="com/hhw/dao/mapper/ReceiversMapper.xml" />
+    </mappers>
+
+    <!--
+    <mappers>
+        <mapper resource="com.hhw.dao.mapper.UsersMapper.xml" />
+        <mapper resource="com.hhw.dao.mapper.CartHasGoodsMapper.xml" />
+        <mapper resource="com.hhw.dao.mapper.GroupMapper.xml" />
+        <mapper resource="com.hhw.dao.mapper.OrderHasGoodsMapper.xml" />
+        <mapper resource="com.hhw.dao.mapper.OrdersMapper.xml" />
+        <mapper resource="com.hhw.dao.mapper.GoodsMapper.xml" />
+        <mapper resource="com.hhw.dao.mapper.ReceiversMapper.xml" />
+    </mappers>
+    -->
+
+</configuration>

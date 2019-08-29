@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hhw.dao.CartHasGoodsDao">
+    <resultMap type="CartHasGoods" id="CartHasGoodsResultMap">
+        <id property="id" column="id" />
+        <result property="uid" column="uid" />
+        <result property="gid" column="gid" />
+        <result property="scid" column="scid" />
+        <result property="num" column="num" />
+        <!--
+        <association property="good" javaType="Goods">
+            <id property="gid" column="gid" />
+            <result property="name" column="name" />
+            <result property="thumbnail" column="thumbnail"/>
+        </association>
+        -->
+    </resultMap>
+
+    <insert id="addGoods">
+        insert into cart_has_goods
+        values(#{num},#{scid},#{gid},#{id},#{uid})
+    </insert>
+
+    <delete id="deleteGoods">
+        delete from cart_has_goods
+        where uid=#{uid} and gid=#{gid}
+    </delete>
+
+    <select id="getAllGoods" resultMap="CartHasGoodsResultMap">
+        select *
+        from cart_has_goods
+        where uid=#{uid}
+    </select>
+
+    <update id="editNum">
+        update cart_has_goods set
+        num=#{num} where id=#{id}
+    </update>
+
+    <select id="getCartById" resultType="CartHasGoods">
+        select * from cart_has_goods where id=#{id}
+    </select>
+
+    <delete id="deleteAllCarts">
+        delete  from cart_has_goods where uid=#{uid}
+    </delete>
+
+    <select id="getMaxId" resultType="Integer">
+        select max(id) from cart_has_goods
+    </select>
+</mapper>
